@@ -1,35 +1,27 @@
-#! /usr/bin/bash
-
-# HERE IS OUR SCRIPT
+#!/bin/bash
 
 year=0
-isLeap="true"
-
-echo "Enter a year (yyyy) : "
+isleap="false"
+ 
+echo -n "Enter year (yyyy) : "
 read year
-
-if [ $((year % 4)) -ne 0 ]
-then
-	:	# not a leap year
-elif [ $((year % 400)) -eq 0 ]
-then
-	isLeap="true" 		#bcz its a leap year
-elif [ $((year % 100)) -eq 0 ]
-then
-	:	# not a leap year
+ 
+if [ $((year % 4)) -ne 0 ] ; then
+   : #  not a leap year
+elif [ $((year % 400)) -eq 0 ] ; then
+   # yes, it's a leap year
+   isleap="true"
+elif [ $((year % 100)) -eq 0 ] ; then
+   : # not a leap year
 else
-	isLeap="true"	# its a leap year
+   # it is a leap year
+   isleap="true"
 fi
-
-if [ "$isLeap" == "true" ]
+if [ "$isleap" == "true" ];
 then
-	echo "$year is a leap year"
-	echo "Here is the calender of that year "
-	echo $(cal -y $year)		# this may not give o/p in proper manner
+   echo "$year is leap year"
+   echo "Here is the calender of $year"
+   cal $year
 else
-	echo "$year is not a leap year"
+   echo "$year is NOT leap year"
 fi
-
-# END
-
-
